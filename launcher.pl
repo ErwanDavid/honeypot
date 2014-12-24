@@ -4,7 +4,7 @@ print "Lanceur !\n";
 
 foreach (@port_list)
 {
-        my $cmd = 'perl ./run_honey.pl '.$_.' localhost hihoney  Coll_1209 &';
+        my $cmd = 'perl ./run_honeypot.pl '.$_.' localhost hihoney  Coll_1209 &';
         print "\t - $cmd\n";
         system ($cmd) ;
 
