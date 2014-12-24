@@ -12,7 +12,7 @@ foreach (@port_list)
 
 my $joined = join(' or port ', @port_list);
 
-my $cmd_tcp = "tcpdump -qn 'tcp and port " . $joined . "' | perl ./parser3.pl  &";                                                                                                                                               
+my $cmd_tcp = "tcpdump -qn 'tcp and port " . $joined . "' | perl ./parser_tcp.pl  &";                                                                                                                                               
 #tcpdump -qn 'tcp and port not 22 and port not 445 and port not 27017' | perl ./parser3.pl &                                                                                                                                     
 print "- $cmd_tcp\n";                                                                                                                                                                                                            
                                                                                                                                                                                                                                  
