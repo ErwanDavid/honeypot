@@ -40,7 +40,7 @@ my $collect       = $database_mg->get_collection( $mongocollec );
 my $done = pack ("H*", '16030100010E');
 
 # Your message here
-my $taunt = "09809*)(*)(76&^%&(*&^7657332         Humm nice ass!";
+my $taunt = "09809*)(*)(76&^%&(*&^7657332         This is it!";
 my $troll = pack ("H*", ('180301' . sprintf( "%04x", length($taunt))));
 
 # main "barf responses into the socket" loop
