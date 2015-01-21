@@ -17,8 +17,8 @@ use DateTime;
 # DB
 # CONFIG VARIABLES
 my $client              = MongoDB::Connection->new(host => 'localhost', port => 27017);
-my $database_mg         = $client->get_database( 'hihoney' );
-my $logip                       = $database_mg->get_collection( 'tcpd_20141212' );
+my $database_mg         = $client->get_database( 'mongodatabase' );
+my $logip                       = $database_mg->get_collection( 'mongotcpcollection' );
 
 
 my $logfile = './LOG.txt';
