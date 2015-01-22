@@ -20,8 +20,8 @@ my $mongocollec = $ARGV[3];
 
 
 
-print "Hi honey on $port\n";
-print "Will repport to $mongosrv $mongobase $mongocollec\n";
+print "\t\tHi honey on $port\n";
+print "\t\tWill repport to $mongosrv $mongobase $mongocollec\n";
 
 my $sock = new IO::Socket::INET (
                                   LocalPort => $port,
@@ -52,7 +52,7 @@ while (my $client= $sock->accept()) {
   my $client_addr = $client->peeraddr();
   #my ($cDomain, $cPort, $cHost) = unpack('S n a4 x8', $client_addr);
   my $client_ip = join('.',unpack('C4', $client_addr));
-  
+  my $now = DateTime->now;
   $collect->insert({"Po" => $port, "Ip"=> $client_ip,"T"=> '{i}', "D" => $now});
 
 
@@ -63,7 +63,7 @@ while (my $client= $sock->accept()) {
     chomp();
     my $line = $_;
     $line =~ s/\W/_/g;
-    my $now = DateTime->now;
+    $now = DateTime->now;
     #print "GET $client_ip >$line<\n";
     $collect->insert({"Po" => $port, "Ip"=> $client_ip,"T"=> $line, "D" => $now});
 
