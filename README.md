@@ -10,4 +10,4 @@ root privilege (for tcpdump and opening Well Known Port)
 mongoDB (for loggin)
 
 Usage example:
-Just edit and run the launcher.pl
+ perl ./launcher.pl localhost logdb log_simple log_tcp 2221,2223,2280,28080,22139
