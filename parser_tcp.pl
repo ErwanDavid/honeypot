@@ -1,9 +1,7 @@
-#!/usr/bin/perl                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                 
-use strict;                                                                                                                                                                                                                      
-use MongoDB;                                                                                                                                                                                                                     
-use MongoDB::OID;                                                                                                                                                                                                                
-use DateTime;
+#!/usr/bin/perl
+use strict;
+use MongoDB;
+use MongoDB::OID;
 
 
 # use tcp command
@@ -16,18 +14,11 @@ use DateTime;
 
 # DB
 # CONFIG VARIABLES
-my $client              = MongoDB::Connection->new(host => 'localhost', port => 27017);
-my $database_mg         = $client->get_database( 'mongodatabase' );
-my $logip                       = $database_mg->get_collection( 'mongotcpcollection' );
+my ($server,$database,$collection) = @ARGV;
+my $client              = MongoDB::Connection->new(host => $server, port => 27017);
+my $database_mg         = $client->get_database($database);
+my $logip               = $database_mg->get_collection($collection);
 
-
-my $logfile = './LOG.txt';
-
-
-$| = 1;
-
-
-my $debug = 3;
 
 my $var;
 while ($var = <STDIN>)
@@ -39,34 +30,9 @@ while ($var = <STDIN>)
                 my $p1  = $3;
                 my $ip2 = $4;
                 my $p2  = $5;
-                #&Log("$date;$ip1;$p1;$ip2;$p2",2);
                 $logip->insert({"is" => $ip1, "ps" => $p1,"id" => $ip2,"pd" => $p2,"da" => $date, date => DateTime->now});
 
 
         }
-
-}
-
-sub Log
-{
-        my $mess = shift;
-        my $level = shift;
-
-
-
-        if ($level <= $debug)
-        {
-                        my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
-                        $mon = sprintf "%.2d",$mon+1;
-                        $mday = sprintf "%.2d",$mday;
-                        $hour = sprintf "%.2d",$hour;
-                        $min = sprintf "%.2d",$min;
-                        $sec = sprintf "%.2d",$sec;
-                        $mday = sprintf "%.2d",$mday+1;
-                        my $date = $mon.'-'.$mday.'-'.$hour.':'.$min.':'.$sec;
-                print LOG "[$date]$mess\n";
-        }
-        close(LOG);
-
 
 }
